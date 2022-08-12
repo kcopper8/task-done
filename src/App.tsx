@@ -1,4 +1,4 @@
-import TodoList from "@containers/TodoList/todoList";
+import TodoList from "@containers/TodoList";
 
 const App = () => {
   return (
