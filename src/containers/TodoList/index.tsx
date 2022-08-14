@@ -1,6 +1,4 @@
-import AddTodoModal from "@containers/AddTodoModal";
 import { Button, List } from "antd";
-import { useState } from "react";
 
 interface TodoListProps {}
 
@@ -13,25 +11,19 @@ const data = [
 ];
 
 const TodoList = ({}: TodoListProps) => {
-  const [openAdd, setOpenAdd] = useState(false);
-  const handleClick = () => {
-    setOpenAdd(true);
-  };
-
   return (
     <>
       <List
         size="large"
         bordered
         header={
-          <Button type={"primary"} onClick={handleClick}>
+          <Button type={"primary"} href="/add">
             newItem
           </Button>
         }
         dataSource={data}
         renderItem={(item) => <List.Item>{item}</List.Item>}
       />
-      {openAdd && <AddTodoModal />}
     </>
   );
 };

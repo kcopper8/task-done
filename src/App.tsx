@@ -1,3 +1,4 @@
+import AddTodo from "@containers/AddTodo";
 import TodoList from "@containers/TodoList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -6,7 +7,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<TodoList />} />
-        <Route path="/add" element={<TodoList />} />
+        <Route path="/add" element={<AddTodo />} />
       </Routes>
     </BrowserRouter>
   );
