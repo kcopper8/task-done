@@ -1,16 +1,10 @@
 import { Button, List } from "antd";
+import { useTodoList } from "../../store/todo";
 
 interface TodoListProps {}
 
-const data = [
-  "Racing car sprays burning fuel into crowd.",
-  "Japanese princess to wed commoner.",
-  "Australian walks 100km after outback crash.",
-  "Man charged over missing wedding girl.",
-  "Los Angeles battles huge wildfires.",
-];
-
 const TodoList = ({}: TodoListProps) => {
+  const { todoList } = useTodoList();
   return (
     <>
       <List
@@ -21,8 +15,8 @@ const TodoList = ({}: TodoListProps) => {
             newItem
           </Button>
         }
-        dataSource={data}
-        renderItem={(item) => <List.Item>{item}</List.Item>}
+        dataSource={todoList}
+        renderItem={(item) => <List.Item>{item.title}</List.Item>}
       />
     </>
   );
