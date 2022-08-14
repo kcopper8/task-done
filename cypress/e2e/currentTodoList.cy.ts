@@ -4,7 +4,7 @@ describe("currentTodoList", function () {
       cy.visit("/");
       cy.contains("Los")
         .should("exist")
-        .find("[data-test-ui=CurrentTodoList_item_done]")
+        .find("[data-test-id=CurrentTodoList_item_done]")
         .click();
       cy.contains("Los").should("not.exist");
     });
