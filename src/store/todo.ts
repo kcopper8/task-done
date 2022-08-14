@@ -1,4 +1,4 @@
-import { atom, useRecoilValue } from "recoil";
+import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 import { Todo } from "./type";
 
 const $todoList = atom<Todo[]>({
@@ -15,4 +15,15 @@ const $todoList = atom<Todo[]>({
 export const useTodoList = () => {
   const todoList = useRecoilValue($todoList);
   return { todoList };
+};
+
+export const useAddTodo = () => {
+  const setTodoList = useSetRecoilState($todoList);
+  return {
+    addTodo: (todo: Todo) => {
+      setTodoList((prevTodoList) => {
+        return [...prevTodoList, todo];
+      });
+    },
+  };
 };
