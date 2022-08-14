@@ -1,4 +1,5 @@
 import { atom, useSetRecoilState } from "recoil";
+import { saveTodayDoneList, storage } from "./storage";
 import { Todo } from "./type";
 
 export interface Done {
@@ -8,7 +9,20 @@ export interface Done {
 
 export const $todayDoneList = atom<Done[]>({
   key: "TD-DONE-LIST.TODAY",
-  default: [],
+  default: (async () => {
+    const doneList = await storage.getItem<Done[]>("todayDoneList");
+    if (!doneList) {
+      return [];
+    }
+    return doneList;
+  })(),
+  effects: [
+    ({ onSet }) => {
+      onSet((newValue) => {
+        saveTodayDoneList(newValue);
+      });
+    },
+  ],
 });
 
 export const useDoneCurrentTodo = () => {

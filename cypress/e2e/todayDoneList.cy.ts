@@ -1,8 +1,11 @@
-import { testId } from "./util";
+import { prepareStorage, testId } from "./util";
 
 describe("todayDoneList", function () {
   describe("아무것도 안했으면", function () {
     it("빈 목록이 보인다.", function () {
+      cy.visit("/");
+      prepareStorage("todayDoneList", []);
+
       cy.visit("/today");
       cy.get(testId("todayDoneList_item")).should("not.exist");
     });
@@ -10,8 +13,12 @@ describe("todayDoneList", function () {
 
   describe("currentTodoList 에서 Done 을 하면", function () {
     it("todayDoneList 에 보인다.", function () {
-      const selectToBeDoneTodo = () => cy.contains("Los");
       cy.visit("/");
+      prepareStorage("todoList", "todoList");
+      prepareStorage("todayDoneList", []);
+
+      cy.visit("/");
+      const selectToBeDoneTodo = () => cy.contains("Los");
       selectToBeDoneTodo().find(testId("CurrentTodoList_item_done")).click();
       cy.get(testId("today_menu_item")).click();
       selectToBeDoneTodo();
