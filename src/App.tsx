@@ -1,5 +1,5 @@
 import AddTodo from "@containers/AddTodo";
-import TodoList from "@containers/TodoList";
+import CurrentTodoList from "@containers/CurrentTodoList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 
@@ -8,7 +8,7 @@ const App = () => {
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<TodoList />} />
+          <Route path="/" element={<CurrentTodoList />} />
           <Route path="/add" element={<AddTodo />} />
         </Routes>
       </BrowserRouter>

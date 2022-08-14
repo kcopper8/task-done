@@ -23,6 +23,7 @@
   "dependencies": {
     "antd": "^4.18.5",
     "gh-pages": "^3.2.3",
+    "lodash": "^4.17.21",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.3",
     "react": "^17.0.2",
@@ -38,6 +39,7 @@
     "@release-it/bumper": "^3.0.1",
     "@release-it/conventional-changelog": "^4.1.0",
     "@types/babel__core": "^7.1.18",
+    "@types/lodash": "^4",
     "@types/node": "^17.0.15",
     "@types/prettier": "^2",
     "@types/react": "^17.0.39",

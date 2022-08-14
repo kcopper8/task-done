@@ -1,5 +1,6 @@
-import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+import { atom, selector, useRecoilValue, useSetRecoilState } from "recoil";
 import { v4 } from "uuid";
+import { $todayDoneList } from "./done";
 import { Todo } from "./type";
 
 const $todoList = atom<Todo[]>({
@@ -13,9 +14,37 @@ const $todoList = atom<Todo[]>({
   ],
 });
 
+const $currentTodoList = selector<Todo[]>({
+  key: "TD-TODO-LIST.CURRENT",
+  get: ({ get }) => {
+    const todoList = get($todoList);
+    const todayDoneList = get($todayDoneList);
+
+    const doneIdSet = new Set();
+    todayDoneList.forEach(({ todo }) => {
+      doneIdSet.add(todo);
+    });
+
+    return todoList.filter((todo) => {
+      return !doneIdSet.has(todo.id);
+    });
+  },
+});
+
+/**
+ * 전체 todoList
+ */
 export const useTodoList = () => {
   const todoList = useRecoilValue($todoList);
   return { todoList };
+};
+
+/**
+ * 현재 todoList
+ */
+export const useCurrentTodoList = () => {
+  const currentTodoList = useRecoilValue($currentTodoList);
+  return { currentTodoList };
 };
 
 export const useAddTodo = () => {
