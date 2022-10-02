@@ -20,6 +20,11 @@ const GlobalLayout = ({}: GlobalLayoutProps) => {
             Today
           </Menu.Item>
           <Menu.Item
+            key="todo"
+            onClick={() => navigate("/todo")}
+            children={"Todo"}
+          />
+          <Menu.Item
             key="newTodo"
             onClick={() => navigate("/add")}
             children={"New Todo"}
