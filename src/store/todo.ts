@@ -2,7 +2,7 @@ import { atom, selector, useRecoilValue, useSetRecoilState } from "recoil";
 import { v4 } from "uuid";
 import { $todayDoneList } from "./done";
 import { saveTodoList, storage } from "./storage";
-import { Todo } from "./type";
+import { Todo, TodoBody, TodoId } from "./type";
 
 const $todoList = atom<Todo[]>({
   key: "TD-TODO-LIST",
@@ -78,7 +78,7 @@ export const useTodayDoneTodoList = () => {
 export const useAddTodo = () => {
   const setTodoList = useSetRecoilState($todoList);
   return {
-    addTodo: (todo: Omit<Todo, "id">) => {
+    addTodo: (todo: TodoBody) => {
       setTodoList((prevTodoList) => {
         return [
           ...prevTodoList,
@@ -89,5 +89,22 @@ export const useAddTodo = () => {
         ];
       });
     },
+  };
+};
+
+export const useTodo = (id: TodoId) => {
+  const { todoList } = useTodoList();
+  return todoList.find((todo) => todo.id === id);
+};
+
+export const useSaveTodo = () => {
+  const setTodoList = useSetRecoilState($todoList);
+
+  return (todo: Todo) => {
+    setTodoList((prevTodoList) => {
+      return prevTodoList.map((prevTodo) =>
+        prevTodo.id === todo.id ? todo : prevTodo
+      );
+    });
   };
 };

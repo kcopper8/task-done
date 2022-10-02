@@ -1,4 +1,7 @@
+export type TodoId = string;
+
 export interface Todo {
-  id: string;
+  id: TodoId;
   title: string;
 }
+export type TodoBody = Omit<Todo, "id">;
