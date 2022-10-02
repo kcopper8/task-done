@@ -1,7 +1,6 @@
 import * as localforage from "localforage";
 import { noop } from "lodash";
-import { Done } from "./done";
-import { Todo } from "./type";
+import { Done, Todo } from "./type";
 
 const storage = localforage.createInstance({
   name: "storage",

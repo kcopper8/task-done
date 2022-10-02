@@ -5,3 +5,8 @@ export interface Todo {
   title: string;
 }
 export type TodoBody = Omit<Todo, "id">;
+
+export interface Done {
+  todo: Todo["id"];
+  completedAt: number;
+}

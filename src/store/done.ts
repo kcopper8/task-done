@@ -1,11 +1,6 @@
 import { atom, useSetRecoilState } from "recoil";
 import { getTodayDoneList, saveTodayDoneList } from "./storage";
-import { Todo } from "./type";
-
-export interface Done {
-  todo: Todo["id"];
-  completedAt: number;
-}
+import { Done, Todo } from "./type";
 
 export const $todayDoneList = atom<Done[]>({
   key: "TD-DONE-LIST.TODAY",
