@@ -24,11 +24,6 @@ const GlobalLayout = ({}: GlobalLayoutProps) => {
             onClick={() => navigate("/todo")}
             children={"Todo"}
           />
-          <Menu.Item
-            key="newTodo"
-            onClick={() => navigate("/add")}
-            children={"New Todo"}
-          />
         </Menu>
       </Layout.Header>
       <Layout.Content>
