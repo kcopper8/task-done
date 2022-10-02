@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "antd": "^4.18.5",
+    "date-fns": "^2.29.3",
     "gh-pages": "^3.2.3",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",

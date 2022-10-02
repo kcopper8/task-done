@@ -14,12 +14,12 @@ export const getTodoList = () => {
   return storage.getItem<Todo[]>("todoList");
 };
 
-export const saveTodayDoneList = (todayDoneList: Done[]) => {
-  storage.setItem("todayDoneList", todayDoneList).then(noop);
+export const saveDoneList = (doneList: Done[], dateKey: string) => {
+  storage.setItem(`doneList_${dateKey}`, doneList).then(noop);
 };
 
-export const getTodayDoneList = () => {
-  return storage.getItem<Done[]>("todayDoneList");
+export const getDoneList = (dateKey: string) => {
+  return storage.getItem<Done[]>(`doneList, ${dateKey}`);
 };
 
 const resetStorage = (key: string, item: any) => {

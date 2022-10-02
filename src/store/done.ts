@@ -1,27 +1,33 @@
-import { atom, useSetRecoilState } from "recoil";
-import { getTodayDoneList, saveTodayDoneList } from "./storage";
-import { Done, Todo } from "./type";
+import { todayKey } from "@services/date";
+import { atomFamily, selector, useSetRecoilState } from "recoil";
+import { getDoneList, saveDoneList } from "./storage";
+import { Todo } from "./type";
 
-export const $todayDoneList = atom<Done[]>({
-  key: "TD-DONE-LIST.TODAY",
-  default: (async () => {
-    const doneList = await getTodayDoneList();
+const $doneList = atomFamily({
+  key: "TD-DONE-LIST.PER_DAY",
+  default: async (dateKey: string) => {
+    const doneList = await getDoneList(dateKey);
     if (!doneList) {
       return [];
     }
     return doneList;
-  })(),
-  effects: [
+  },
+  effects: (dateKey) => [
     ({ onSet }) => {
       onSet((newValue) => {
-        saveTodayDoneList(newValue);
+        saveDoneList(newValue, dateKey);
       });
     },
   ],
 });
 
+export const $todayDoneList = selector({
+  key: "TD-DONE-LIST.TODAY",
+  get: ({ get }) => get($doneList(todayKey())),
+});
+
 export const useDoneCurrentTodo = () => {
-  const setTodayDoneList = useSetRecoilState($todayDoneList);
+  const setTodayDoneList = useSetRecoilState($doneList(todayKey()));
 
   return {
     doneCurrentTodo: ({ id }: Todo) => {

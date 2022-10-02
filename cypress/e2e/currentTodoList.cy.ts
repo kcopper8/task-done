@@ -1,11 +1,11 @@
-import { prepareStorage } from "./util";
+import PrepareStorage from "./util/prepare";
 
 describe("currentTodoList", function () {
   describe("Done 버튼을 누르면", function () {
     it("누른 todo 가 currentTodoList 에서 제거된다.", function () {
       cy.visit("/");
-      prepareStorage("todoList", "todoList");
-      prepareStorage("todayDoneList", []);
+      PrepareStorage.todoList();
+      PrepareStorage.clearTodayDoneList();
       cy.visit("/");
 
       cy.contains("Los")

@@ -1,9 +1,10 @@
-import { prepareStorage, testId } from "./util";
+import { testId } from "./util";
+import PrepareStorage from "./util/prepare";
 
 describe("editTodo", function () {
   before(() => {
     cy.visit("/");
-    prepareStorage("todoList", "todoList");
+    PrepareStorage.todoList();
   });
 
   it("접근 시", function () {

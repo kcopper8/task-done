@@ -1,10 +1,10 @@
-import { prepareStorage } from "./util";
+import PrepareStorage from "./util/prepare";
 
 describe("todoList", function () {
   context("접근 시", function () {
     before(() => {
       cy.visit("/");
-      prepareStorage("todoList", "todoList");
+      PrepareStorage.todoList();
     });
     beforeEach(() => {
       cy.visit("/todo");
