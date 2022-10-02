@@ -1,13 +1,13 @@
 import { atom, selector, useRecoilValue, useSetRecoilState } from "recoil";
 import { v4 } from "uuid";
 import { $todayDoneList } from "./done";
-import { saveTodoList, storage } from "./storage";
+import { getTodoList, saveTodoList } from "./storage";
 import { Todo, TodoBody, TodoId } from "./type";
 
 const $todoList = atom<Todo[]>({
   key: "TD-TODO-LIST",
   default: (async () => {
-    const todoList = await storage.getItem<Todo[]>("todoList");
+    const todoList = await getTodoList();
     if (!todoList) {
       return [];
     }
