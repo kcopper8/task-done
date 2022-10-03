@@ -1,5 +1,6 @@
 import { todayKey } from "@services/date";
 import { atomFamily, selector, useSetRecoilState } from "recoil";
+import { v4 } from "uuid";
 import { getDoneList, saveDoneList } from "./storage";
 import { Todo } from "./type";
 
@@ -35,6 +36,7 @@ export const useDoneCurrentTodo = () => {
         return [
           ...prevTodayDoneList,
           {
+            id: v4(),
             todo: id,
             completedAt: Date.now(),
           },

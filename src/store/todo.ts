@@ -4,7 +4,7 @@ import { $todayDoneList } from "./done";
 import { getTodoList, saveTodoList } from "./storage";
 import { Todo, TodoBody, TodoId } from "./type";
 
-const $todoList = atom<Todo[]>({
+export const $todoList = atom<Todo[]>({
   key: "TD-TODO-LIST",
   default: (async () => {
     const todoList = await getTodoList();
@@ -39,21 +39,6 @@ const $currentTodoList = selector<Todo[]>({
   },
 });
 
-const $todayDoneTodoList = selector<Todo[]>({
-  key: "TD-TODO-LIST.TODAY-DONE",
-  get: ({ get }) => {
-    const todoList = get($todoList);
-
-    const todoListMap = new Map();
-    todoList.forEach((todo) => {
-      todoListMap.set(todo.id, todo);
-    });
-
-    const todayDoneList = get($todayDoneList);
-    return todayDoneList.map(({ todo }) => todoListMap.get(todo));
-  },
-});
-
 /**
  * 전체 todoList
  */
@@ -68,11 +53,6 @@ export const useTodoList = () => {
 export const useCurrentTodoList = () => {
   const currentTodoList = useRecoilValue($currentTodoList);
   return { currentTodoList };
-};
-
-export const useTodayDoneTodoList = () => {
-  const todayDoneList = useRecoilValue($todayDoneTodoList);
-  return { todayDoneList };
 };
 
 export const useAddTodo = () => {

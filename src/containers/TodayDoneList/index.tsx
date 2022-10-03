@@ -1,5 +1,5 @@
 import { List } from "antd";
-import { useTodayDoneTodoList } from "../../store/todo";
+import { useTodayDoneTodoList } from "../../store/doneTodo";
 
 interface TodayDoneListProps {}
 
@@ -11,7 +11,9 @@ const TodayDoneList = ({}: TodayDoneListProps) => {
       bordered
       dataSource={todayDoneList}
       renderItem={(item) => (
-        <List.Item data-test-id="TodayDoneList_item">{item.title}</List.Item>
+        <List.Item data-test-id="TodayDoneList_item">
+          {item.todo.title}
+        </List.Item>
       )}
     />
   );
