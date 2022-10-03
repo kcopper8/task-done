@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 import { getDoneList, saveDoneList } from "./storage";
 import { Todo } from "./type";
 
-const $doneList = atomFamily({
+export const $doneList = atomFamily({
   key: "TD-DONE-LIST.PER_DAY",
   default: async (dateKey: string) => {
     const doneList = await getDoneList(dateKey);

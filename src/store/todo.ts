@@ -4,7 +4,7 @@ import { $todayDoneList } from "./done";
 import { getTodoList, saveTodoList } from "./storage";
 import { Todo, TodoBody, TodoId } from "./type";
 
-export const $todoList = atom<Todo[]>({
+const $todoList = atom<Todo[]>({
   key: "TD-TODO-LIST",
   default: (async () => {
     const todoList = await getTodoList();
@@ -20,6 +20,20 @@ export const $todoList = atom<Todo[]>({
       });
     },
   ],
+});
+
+export const $todoMap = selector<Map<TodoId, Todo>>({
+  key: "TD-TODO-MAP",
+  get: ({ get }) => {
+    const todoList = get($todoList);
+
+    const todoListMap = new Map<TodoId, Todo>();
+    todoList.forEach((todo) => {
+      todoListMap.set(todo.id, todo);
+    });
+
+    return todoListMap;
+  },
 });
 
 const $currentTodoList = selector<Todo[]>({

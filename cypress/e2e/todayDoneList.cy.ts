@@ -7,7 +7,7 @@ describe("todayDoneList", function () {
       cy.visit("/");
       PrepareStorage.clearTodayDoneList();
 
-      cy.visit("/today");
+      cy.visit("/done");
       cy.get(testId("todayDoneList_item")).should("not.exist");
     });
   });
@@ -21,7 +21,7 @@ describe("todayDoneList", function () {
       cy.visit("/");
       const selectToBeDoneTodo = () => cy.contains("Los");
       selectToBeDoneTodo().find(testId("CurrentTodoList_item_done")).click();
-      cy.get(testId("today_menu_item")).click();
+      cy.get(testId("done_menu_item")).click();
       selectToBeDoneTodo();
     });
   });

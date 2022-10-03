@@ -12,12 +12,13 @@ const GlobalLayout = ({}: GlobalLayoutProps) => {
           <Menu.Item key="home" onClick={() => navigate("/")}>
             Home
           </Menu.Item>
+
           <Menu.Item
-            key="today"
-            onClick={() => navigate("/today")}
-            data-test-id="today_menu_item"
+            key="done"
+            onClick={() => navigate("/done")}
+            data-test-id="done_menu_item"
           >
-            Today
+            Done
           </Menu.Item>
           <Menu.Item
             key="todo"

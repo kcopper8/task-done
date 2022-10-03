@@ -1,28 +1,27 @@
-import { selector, useRecoilValue } from "recoil";
-import { $todayDoneList } from "./done";
-import { $todoList } from "./todo";
-import { DoneTodo, Todo, TodoId } from "./type";
+import { selectorFamily, useRecoilValue } from "recoil";
+import { $doneList } from "./done";
+import { $todoMap } from "./todo";
+import { DoneTodo } from "./type";
 
-const $todayDoneTodoList = selector<DoneTodo[]>({
-  key: "TD-TODO-LIST.TODAY-DONE",
-  get: ({ get }) => {
-    const todoList = get($todoList);
+const $doneTodoList = selectorFamily<DoneTodo[], string>({
+  key: "TD-DONE-TODO-LIST.PER_DAY",
+  get:
+    (dayKey) =>
+    ({ get }) => {
+      const todoMap = get($todoMap);
 
-    const todoListMap = new Map<TodoId, Todo>();
-    todoList.forEach((todo) => {
-      todoListMap.set(todo.id, todo);
-    });
-
-    const todayDoneList = get($todayDoneList);
-    return todayDoneList.map((done) => ({
-      id: done.id,
-      done,
-      todo: todoListMap.get(done.todo),
-    }));
-  },
+      const doneList = get($doneList(dayKey));
+      return doneList.map((done) => ({
+        id: done.id,
+        done,
+        todo: todoMap.get(done.todo),
+      }));
+    },
 });
 
-export const useTodayDoneTodoList = () => {
-  const todayDoneList = useRecoilValue($todayDoneTodoList);
-  return { todayDoneList };
+export const useDoneTodoList = (dayKey: string) => {
+  const doneList = useRecoilValue($doneTodoList(dayKey));
+  return {
+    doneList,
+  };
 };

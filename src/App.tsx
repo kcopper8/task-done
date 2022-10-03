@@ -1,6 +1,6 @@
 import AddTodo from "@containers/AddTodo";
 import CurrentTodoList from "@containers/CurrentTodoList";
-import TodayDoneList from "@containers/TodayDoneList";
+import DayDoneTodoList from "@containers/Done/DayDoneTodoList";
 import EditTodo from "@containers/Todo/EditTodo";
 import TodoList from "@containers/TodoList";
 import { Suspense } from "react";
@@ -16,7 +16,7 @@ const App = () => {
           <Routes>
             <Route element={<GlobalLayout />}>
               <Route path="/" element={<CurrentTodoList />} />
-              <Route path="/today" element={<TodayDoneList />} />
+              <Route path="/done" element={<DayDoneTodoList />} />
               <Route path="/todo" element={<TodoList />} />
               <Route path="/todo/:id" element={<EditTodo />} />
               <Route path="/add" element={<AddTodo />} />
